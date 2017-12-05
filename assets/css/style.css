@@ -1,0 +1,37 @@
+body {
+	background: url('../images/Transportation-A-Background-image_0.jpg');
+	/*background: url("https://lionelllc.files.wordpress.com/2013/02/6-38960_prrheritage.jpg") center, no-repeat;*/
+	background-size: 100% auto;
+	font-family: Arial, 'sans-serif';
+	color: #fff;
+}
+
+.main-header {
+	margin-top: 20px;
+	font-size: 40px;
+	text-align: center;
+	font-family: 'Exo', sans-serif;
+}
+
+th {
+	font-weight: bold;
+}
+
+.train-content {
+	padding: 30px;
+	color: #000;
+}
+
+.add-train-content {
+	padding: 30px;
+	color: #000;
+}
+
+.panel-heading {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.table-striped {
+	background: #d5deed;
+}
