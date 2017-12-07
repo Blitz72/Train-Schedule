@@ -25,6 +25,59 @@
   var submitTime = false;
   var submitFrequency = false;
 
+  // var timeNow = moment();
+  // console.log(timeNow._d);
+  // $('.schedule-heading').append(timeNow._d);
+
+  function updateClock() {
+    // $('#train-table').empty();
+    // $('#train-table').addClass('table table-striped table-bordered')
+    // $('#train-table').html('<tr><th>Train Name</th><th>Destination</th><th>First Departure</th><th>Frequency</th><th>Next Departure</th></tr>');
+
+    var time = moment();
+    $('.time').html(time._d);
+    // call this function again in 1000ms
+    setTimeout(updateClock, 1000);
+
+    if (moment().seconds() === 0){
+
+      database.ref().on('value', function(childSnapshot){
+
+        // var csv = childSnapshot;
+        console.log(childSnapshot);
+        var nextDeparture;
+
+        childSnapshot.forEach(function(){
+          $('#train-table tr:last').remove();
+        })
+
+        childSnapshot.forEach(function(childSnap){
+          // console.log(childSnap.val());
+
+          var childVal = childSnap.val();
+          console.log(childVal.frequency);
+
+          var formattedTime = moment(childVal.firstTime, 'HH:mm');
+            
+          var diffTime = moment().diff(formattedTime, 'minutes') % childVal.frequency;
+
+          //if first train hasn't departed yet diffTime will be negative
+          if (diffTime >= 0){
+            nextDeparture = childVal.frequency - diffTime;
+          } else {
+            nextDeparture = formattedTime.diff(moment(), 'minutes') + 1;
+          }
+          // console.log(nextDeparture);
+
+          $('#train-table').append('<tr><td>' + childVal.name + '</td><td>' + childVal.destination + '</td><td>' +
+            childVal.firstTime + '</td><td>' + childVal.frequency + '</td><td>' + nextDeparture + '</td></tr>');
+        });
+      });
+    }
+  }
+
+  updateClock(); // initial call
+
   $('#add-train').on('click', function(event){
 
     event.preventDefault();
@@ -112,5 +165,3 @@
       csv.firstTime + '</td><td>' + csv.frequency + '</td><td>' + nextDeparture + '</td></tr>');
 
   });
-
-  // console.log(train);

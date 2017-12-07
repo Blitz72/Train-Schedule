@@ -17,9 +17,22 @@ th {
 	font-weight: bold;
 }
 
+.panel-heading {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.time {
+	font-size: 20px;
+}
+
 .train-content {
 	padding: 30px;
 	color: #000;
+}
+
+.table-striped {
+	background: #d5deed;
 }
 
 .add-train-content {
@@ -27,11 +40,9 @@ th {
 	color: #000;
 }
 
-.panel-heading {
-	font-size: 30px;
+label {
 	font-weight: bold;
 }
 
-.table-striped {
-	background: #d5deed;
-}
+
+
